@@ -87,20 +87,28 @@ function desenhar() {
     requestAnimationFrame(desenhar);
     mostrarvelocidade()
     mostrarcombustivel()
+    if (modulolunar.posicao.y >= (canvas.height - 0.09 * modulolunar.altura)) {
+
+        if (modulolunar.velocidade.y >= 0.5) {
+            return alert("voce morreu de queda!");
+        } else {
+            return alert("voce conseguiu pousar");
+        }
+    }
 
     if (jogoAcabado) {
         mostrarGameOver();
-       
+
     }
 
     function mostrarGameOver() {
         contexto.font = "bold 30px Arial";
         contexto.textAlign = "center";
         contexto.textBaseline = "middle";
-        contexto.fillStyle = "red"; 
-        contexto.fillText("GAME OVER", canvas.width / 2, canvas.height / 2); 
+        contexto.fillStyle = "red";
+        contexto.fillText("GAME OVER", canvas.width / 2, canvas.height / 2);
 
-}
+    }
 }
 document.addEventListener("keydown", teclaPressionada);
 
@@ -127,7 +135,7 @@ function atracaogravitacional() {
     modulolunar.posicao.x += modulolunar.velocidade.x;
     modulolunar.posicao.y += modulolunar.velocidade.y;
     if (modulolunar.motorligado) {
-        modulolunar.velocidade.y -= 0.0120
+        modulolunar.velocidade.y -= 0.0500
         modulolunar.combustivel -= 0.05
     } if (modulolunar.combustivel < 0) {
         modulolunar.combustivel = 0
